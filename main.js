@@ -1,3 +1,17 @@
+/* boot screen -> show site */
+
+setTimeout(()=>{
+
+document.getElementById("bootScreen").style.display="none"
+
+document.querySelector(".container").style.display="block"
+
+},5000)
+
+
+
+/* countdown */
+
 const second = 1000
 const minute = second * 60
 const hour = minute * 60
@@ -7,7 +21,7 @@ const releaseDate = "March 19, 2026 00:00:00"
 
 const countDown = new Date(releaseDate).getTime()
 
-const x = setInterval(function(){
+const x = setInterval(()=>{
 
 const now = new Date().getTime()
 const distance = countDown - now
@@ -21,15 +35,21 @@ if(distance < 0){
 
 clearInterval(x)
 
-document.getElementById("headline").innerText = "🚀 Bryce Files Released"
+document.getElementById("headline").innerText="FILES RELEASED"
 
-document.getElementById("countdown").style.display = "none"
+document.getElementById("countdown").style.display="none"
 
-document.getElementById("content").style.display = "block"
+document.getElementById("decryptSection").style.display="none"
+
+document.getElementById("content").style.display="block"
 
 document.getElementById("releaseSound").play()
 
-launchConfetti()
+confetti({
+particleCount:250,
+spread:150,
+origin:{y:.6}
+})
 
 }
 
@@ -37,59 +57,45 @@ launchConfetti()
 
 
 
-function launchConfetti(){
+/* MATRIX RAIN */
 
-confetti({
-particleCount:200,
-spread:120,
-origin:{y:.6}
-})
+const canvas=document.getElementById("matrix")
+const ctx=canvas.getContext("2d")
 
-}
+canvas.height=window.innerHeight
+canvas.width=window.innerWidth
 
+const letters="01ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-/* STARFIELD BACKGROUND */
+const fontSize=16
+const columns=canvas.width/fontSize
 
-const canvas = document.getElementById("stars")
-const ctx = canvas.getContext("2d")
+const drops=[]
 
-canvas.width = window.innerWidth
-canvas.height = window.innerHeight
+for(let x=0;x<columns;x++)
+drops[x]=1
 
-let stars = []
+function draw(){
 
-for(let i=0;i<200;i++){
+ctx.fillStyle="rgba(0,0,0,0.05)"
+ctx.fillRect(0,0,canvas.width,canvas.height)
 
-stars.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-size:Math.random()*2
-})
+ctx.fillStyle="#00ff9c"
+ctx.font=fontSize+"px monospace"
 
-}
+for(let i=0;i<drops.length;i++){
 
-function drawStars(){
+const text=letters.charAt(Math.floor(Math.random()*letters.length))
 
-ctx.clearRect(0,0,canvas.width,canvas.height)
+ctx.fillText(text,i*fontSize,drops[i]*fontSize)
 
-ctx.fillStyle="white"
+if(drops[i]*fontSize>canvas.height && Math.random()>0.975)
+drops[i]=0
 
-stars.forEach(star=>{
-
-ctx.beginPath()
-ctx.arc(star.x,star.y,star.size,0,Math.PI*2)
-ctx.fill()
-
-star.y+=0.3
-
-if(star.y>canvas.height){
-star.y=0
-}
-
-})
-
-requestAnimationFrame(drawStars)
+drops[i]++
 
 }
 
-drawStars()
+}
+
+setInterval(draw,33)
