@@ -8,79 +8,117 @@ body{
 height:100vh;
 font-family:'Orbitron', sans-serif;
 display:flex;
-align-items:center;
 justify-content:center;
+align-items:center;
 color:white;
-text-align:center;
 overflow:hidden;
+background:black;
 }
 
-/* Background image */
-body::before{
-content:"";
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background-image:url("https://images.unsplash.com/photo-1534975680042-9fbd9d3a7c4e");
-background-size:cover;
-background-position:center;
-z-index:-2;
-}
+/* star canvas */
 
-/* dark overlay */
-.overlay{
+#stars{
 position:fixed;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.65);
 z-index:-1;
 }
 
+/* container */
+
 .container{
+
+backdrop-filter:blur(10px);
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.15);
+padding:60px;
+border-radius:20px;
+text-align:center;
+
+box-shadow:
+0 0 30px rgba(0,255,255,.3);
+
 animation:fadeIn 2s ease;
+
 }
+
+/* title */
 
 h1{
 font-size:3rem;
+text-shadow:0 0 20px cyan;
 margin-bottom:10px;
-letter-spacing:2px;
-text-shadow:0 0 15px #00ffff;
 }
 
 .subtitle{
-opacity:0.8;
+opacity:.7;
 margin-bottom:40px;
 }
 
-/* countdown layout */
+/* countdown */
 
-ul{
+#countdown{
 display:flex;
-gap:30px;
-justify-content:center;
+gap:25px;
 }
 
-li{
-list-style:none;
+.time-box{
+
+background:rgba(0,0,0,.6);
+padding:25px;
+border-radius:10px;
+width:110px;
+
+box-shadow:
+0 0 15px rgba(0,255,255,.6);
+
+transition:.3s;
 }
 
-li span{
+.time-box:hover{
+transform:scale(1.1);
+}
+
+.time-box span{
+
+font-size:3rem;
 display:block;
-font-size:4rem;
 animation:pulse 2s infinite;
+
 }
 
-li p{
-opacity:.7;
+/* button */
+
+.download{
+
+display:inline-block;
+margin-top:30px;
+padding:15px 30px;
+
+background:linear-gradient(45deg,cyan,blue);
+
+color:white;
+text-decoration:none;
+font-size:1.2rem;
+
+border-radius:8px;
+
+box-shadow:0 0 20px cyan;
+
+transition:.3s;
+
+}
+
+.download:hover{
+transform:scale(1.1);
+box-shadow:0 0 35px cyan;
 }
 
 /* animations */
 
 @keyframes pulse{
 0%{transform:scale(1)}
-50%{transform:scale(1.2)}
+50%{transform:scale(1.15)}
 100%{transform:scale(1)}
 }
 
@@ -92,5 +130,4 @@ to{opacity:1; transform:translateY(0);}
 #content{
 display:none;
 font-size:2rem;
-animation:fadeIn 2s ease;
 }
