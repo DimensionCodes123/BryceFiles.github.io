@@ -5,40 +5,59 @@ box-sizing:border-box;
 }
 
 body{
-height:100vh;
-font-family:'Orbitron', sans-serif;
-display:flex;
-justify-content:center;
-align-items:center;
-color:white;
-overflow:hidden;
+font-family:'Orbitron',sans-serif;
 background:black;
+color:white;
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
 }
 
-/* star canvas */
+/* MATRIX BACKGROUND */
 
-#stars{
+#matrix{
 position:fixed;
+top:0;
+left:0;
 width:100%;
 height:100%;
 z-index:-1;
+}
+
+/* boot screen */
+
+#bootScreen{
+
+position:absolute;
+top:20%;
+font-family:'Share Tech Mono',monospace;
+color:#00ff9c;
+font-size:1.2rem;
+
+animation:fadeOut 5s forwards;
+}
+
+#bootScreen p{
+margin:8px 0;
 }
 
 /* container */
 
 .container{
 
+display:none;
+
+background:rgba(0,0,0,.65);
 backdrop-filter:blur(10px);
-background:rgba(255,255,255,0.05);
-border:1px solid rgba(255,255,255,0.15);
+
 padding:60px;
 border-radius:20px;
+
 text-align:center;
 
-box-shadow:
-0 0 30px rgba(0,255,255,.3);
-
-animation:fadeIn 2s ease;
+box-shadow:0 0 40px cyan;
 
 }
 
@@ -50,58 +69,23 @@ text-shadow:0 0 20px cyan;
 margin-bottom:10px;
 }
 
-.subtitle{
-opacity:.7;
-margin-bottom:40px;
-}
-
 /* countdown */
 
 #countdown{
+
 display:flex;
 gap:25px;
+margin-top:20px;
+justify-content:center;
+
 }
 
 .time-box{
 
-background:rgba(0,0,0,.6);
+background:rgba(0,0,0,.8);
 padding:25px;
 border-radius:10px;
 width:110px;
-
-box-shadow:
-0 0 15px rgba(0,255,255,.6);
-
-transition:.3s;
-}
-
-.time-box:hover{
-transform:scale(1.1);
-}
-
-.time-box span{
-
-font-size:3rem;
-display:block;
-animation:pulse 2s infinite;
-
-}
-
-/* button */
-
-.download{
-
-display:inline-block;
-margin-top:30px;
-padding:15px 30px;
-
-background:linear-gradient(45deg,cyan,blue);
-
-color:white;
-text-decoration:none;
-font-size:1.2rem;
-
-border-radius:8px;
 
 box-shadow:0 0 20px cyan;
 
@@ -109,22 +93,91 @@ transition:.3s;
 
 }
 
+.time-box:hover{
+transform:scale(1.15);
+}
+
+.time-box span{
+font-size:3rem;
+display:block;
+}
+
+/* decrypt bar */
+
+#decryptSection{
+margin-top:40px;
+}
+
+.progress-bar{
+
+width:100%;
+height:20px;
+
+background:#111;
+
+border-radius:10px;
+
+margin-top:10px;
+
+}
+
+.progress{
+
+width:0%;
+height:100%;
+
+background:linear-gradient(90deg,cyan,blue);
+
+animation:decrypt 8s forwards;
+
+}
+
+/* download button */
+
+.download{
+
+display:inline-block;
+
+margin-top:40px;
+
+padding:15px 30px;
+
+background:linear-gradient(45deg,cyan,blue);
+
+border-radius:8px;
+
+text-decoration:none;
+
+color:white;
+
+font-size:1.2rem;
+
+box-shadow:0 0 20px cyan;
+
+}
+
 .download:hover{
+
 transform:scale(1.1);
-box-shadow:0 0 35px cyan;
+
+box-shadow:0 0 40px cyan;
+
 }
 
 /* animations */
 
-@keyframes pulse{
-0%{transform:scale(1)}
-50%{transform:scale(1.15)}
-100%{transform:scale(1)}
+@keyframes decrypt{
+
+0%{width:0}
+100%{width:100%}
+
 }
 
-@keyframes fadeIn{
-from{opacity:0; transform:translateY(20px);}
-to{opacity:1; transform:translateY(0);}
+@keyframes fadeOut{
+
+0%{opacity:1}
+100%{opacity:0;visibility:hidden}
+
 }
 
 #content{
